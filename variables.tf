@@ -70,3 +70,21 @@ variable "bypass_type" {
   }
   default = "NEVER"
 }
+
+/*
+variable "tcp_port_ranges" {
+  description = "tcp port ranges"
+  type        = list(object({
+                              from = string
+                              to   = string
+                          }))
+}
+
+variable "udp_port_ranges" {
+  description = "udp port ranges"
+  type        = list(object({
+                              from = string
+                              to   = string
+                          }))
+}
+*/

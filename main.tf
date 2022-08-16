@@ -22,7 +22,21 @@ resource "zpa_application_segment" "application_segment" {
   server_groups {
     id = [zpa_server_group.this.id]
   }
-  tcp_port_ranges  = ["80", "80"]
+  # tcp_port_ranges  = ["80", "80"]
+  dynamic "tcp_port_range" {
+    for_each = local.tcp_port_range
+    content {
+      from = tcp_port_range.value
+      to = tcp_port_range.value
+    }
+  }
+  # dynamic "udp_port_range" {
+  #   for_each = local.udp_port_range
+  #   content {
+  #     from = udp_port_range.value
+  #     to = udp_port_range.value
+  #   }
+  # }
   lifecycle {
     create_before_destroy = true
   }
@@ -32,7 +46,14 @@ locals {
   consul_services = {
     for id, s in var.services : s.name => s...
   }
-
+  tcp_port_range = {
+    from = "80"
+    to = "80"
+  }
+  udp_port_range = {
+    from = "80"
+    to = "80"
+  }
 }
 
 resource "zpa_segment_group" "this" {
