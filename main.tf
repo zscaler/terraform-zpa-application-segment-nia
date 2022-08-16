@@ -13,13 +13,14 @@ resource "zpa_application_segment" "application_segment" {
   name             = replace("${var.appsegment_prefix}${each.key}${var.appsegment_suffix}", "/[^0-9A-Za-z]/", "-")
   description      = "Dynamic application segment generated for service ${each.key} registered in Consul"
   enabled          = true
-  health_reporting = "ON_ACCESS"
-  bypass_type      = "NEVER"
-  icmp_access_type = "PING"
   is_cname_enabled = true
+  health_reporting = var.health_reporting
+  bypass_type      = var.bypass_type
+  icmp_access_type = var.icmp_access_type
   domain_names     = [for s in each.value : s.address]
-  tcp_port_ranges  = ["80", "80"]
   segment_group_id = zpa_segment_group.this.id
+  tcp_port_ranges  = ["80", "80"]
+
   server_groups {
     id = [zpa_server_group.this.id]
   }
