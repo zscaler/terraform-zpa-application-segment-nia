@@ -2,7 +2,7 @@ terraform {
   required_providers {
     zpa = {
       source = "zscaler/zpa"
-      version = "2.2.2"
+      version = "2.3.0"
     }
   }
 }
@@ -19,7 +19,7 @@ resource "zpa_application_segment" "application_segment" {
   icmp_access_type = var.icmp_access_type
   domain_names     = [for s in each.value : s.address]
   segment_group_id = zpa_segment_group.this.id
-  # segment_group_name = "consul_${each.value.name}_segmentgroup"
+  # segment_group_name = zpa_segment_group.this.name
   tcp_port_ranges  = ["80", "80"]
 
   server_groups {
@@ -35,16 +35,10 @@ locals {
   consul_services = {
     for id, s in var.services : s.name => s... if s.status == "passing"
   }
-  # consul_segment_group = {
-  #   for name, ids in local.consul_services :
-  #   name => [for id in ids : var.services[id]]
-  # }
 }
 
 # Segment Group is required as part of the Application Segment Resource
 resource "zpa_segment_group" "this" {
-  # for_each = local.consul_segment_group
-  #name                   = "consul_${each.key}_segmentgroup"
   name                   = "Consul_TF_Sync"
   description            = "Consul_TF_Sync"
   enabled                = true

@@ -1,6 +1,6 @@
 ## Zscaler Private Access (ZPA) Application Segment Module for Network Infrastructure Automation
 
-This Terraform module allows users to support **Application Segments** by integrating [Consul Terraform Sync](https://www.consul.io/docs/nia) with Zscaler Private Access **ZPA** [ZPA Cloud](https://help.zscaler.com/zpa/about-applications) to dynamically manage the **Domain Address** list based on service definition in Consul Catalog.
+This Terraform module allows users to support **Application Segments** by integrating [Consul Terraform Sync](https://www.consul.io/docs/nia) with Zscaler Private Access **ZPA** [ZPA Cloud](https://help.zscaler.com/zpa/about-applications) to dynamically manage the **Domain Names** list based on service definition in Consul Catalog.
 
 Using this Terraform module in conjunction with **consul-terraform-sync** enables teams to reduce manual ticketing processes and automate Day-2 operations related to application scale up/down in a way that is both declarative and repeatable across the organization and across multiple **Application Segments**.
 
@@ -51,7 +51,7 @@ This module is meant for use with **consul-terraform-sync >= 0.1.0** and **Terra
 ## Caveats
 
 * Application Segments can be associated to one or more access polices in the ZPA Cloud. Once an application segment is associated to a policy, it can only be deleted if there are **no** policies associated with that application segment. If the user tries to delete an application segment that is associated with any policy, they will encounter an error. This module creates, updates and deletes application segment based on the sevices in Consul catalog. If the service associated to the application segment de-registers from the Consul catalog, the module will throw an error when trying to destroy the application segment. This is the correct and expected behavior as the application segment is being used in a policy.
-* This behavior does not affect individual ``domain_address`` entries in an individual application segment.
+* This behavior does not affect individual ``domain_names`` entries in an individual application segment.
 
 ## Usage
 
