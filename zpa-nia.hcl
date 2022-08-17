@@ -29,7 +29,7 @@ driver "terraform" {
   required_providers {
     zpa = {
       source = "zscaler/zpa"
-      version = "~> 2.2.2"
+      version = "2.2.2"
     }
   }
 }
@@ -43,7 +43,7 @@ terraform_provider "zpa" {
 task {
   name = "zpa_application_segment_update"
   description = "Application Segment based on service definition"
-  # module = "./"
+  module = "./"
   providers = ["zpa"]
 
   condition "services" {

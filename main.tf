@@ -1,8 +1,8 @@
 terraform {
   required_providers {
     zpa = {
-      source  = "zscaler/zpa"
-      version = "~> 2.2.2"
+      source = "zscaler/zpa"
+      version = "2.2.2"
     }
   }
 }
@@ -19,6 +19,7 @@ resource "zpa_application_segment" "application_segment" {
   icmp_access_type = var.icmp_access_type
   domain_names     = [for s in each.value : s.address]
   segment_group_id = zpa_segment_group.this.id
+  # segment_group_name = "consul_${each.value.name}_segmentgroup"
   tcp_port_ranges  = ["80", "80"]
 
   server_groups {
@@ -27,21 +28,30 @@ resource "zpa_application_segment" "application_segment" {
   lifecycle {
     create_before_destroy = true
   }
+depends_on = [zpa_segment_group.this]
 }
 
 locals {
   consul_services = {
-    for id, s in var.services : s.name => s...
+    for id, s in var.services : s.name => s... if s.status == "passing"
   }
+  # consul_segment_group = {
+  #   for name, ids in local.consul_services :
+  #   name => [for id in ids : var.services[id]]
+  # }
 }
 
+# Segment Group is required as part of the Application Segment Resource
 resource "zpa_segment_group" "this" {
+  # for_each = local.consul_segment_group
+  #name                   = "consul_${each.key}_segmentgroup"
   name                   = "Consul_TF_Sync"
   description            = "Consul_TF_Sync"
   enabled                = true
   tcp_keep_alive_enabled = "1"
 }
 
+# Server Group is required as part of the Application Segment Resource
 resource "zpa_server_group" "this" {
   name              = "Consul_TF_Sync"
   description       = "Consul_TF_Sync"
@@ -52,6 +62,7 @@ resource "zpa_server_group" "this" {
   }
 }
 
+# App Connector Group is required as part of the Server Group Resource
 resource "zpa_app_connector_group" "this" {
   name                     = "Consul_TF_Sync"
   description              = "Consul_TF_Sync"
