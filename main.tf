@@ -19,7 +19,6 @@ resource "zpa_application_segment" "application_segment" {
   icmp_access_type = var.icmp_access_type
   domain_names     = [for s in each.value : s.address]
   segment_group_id = zpa_segment_group.this.id
-  # segment_group_name = zpa_segment_group.this.name
   tcp_port_ranges  = ["80", "80"]
 
   server_groups {
