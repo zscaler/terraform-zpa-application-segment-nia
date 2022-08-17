@@ -19,7 +19,7 @@ If there is a missing feature or a bug - - [open an issue](https://github.com/zs
 The **consul-terraform-sync** runs as a daemon that enables a **publisher-subscriber** paradigm between **Consul** and **ZPA Cloud** to support **Network Infrastructure Automation (NIA)**.
 
 <p align="left">
-<img width="800" src="https://user-images.githubusercontent.com/11891727/95024708-b5ec5900-0639-11eb-9fa5-c11a290a5305.png"> </a>
+<img width="800" src="./Images/consul-terraform-sync-arch.png"> </a>
 </p>
 
 * consul-terraform-sync **subscribes to updates from the Consul catalog** and executes one or more automation **"tasks"** with appropriate value of *service variables* based on those updates. **consul-terraform-sync** leverages [Terraform](https://www.terraform.io/) as the underlying automation tool and utilizes the Terraform provider ecosystem to drive relevant change to the network infrastructure.
