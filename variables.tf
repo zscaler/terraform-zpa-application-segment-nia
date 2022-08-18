@@ -70,3 +70,56 @@ variable "bypass_type" {
   }
   default = "NEVER"
 }
+
+# Segment Group Variables
+variable "segment_group_name" {
+  type        = string
+  description = "Segment Group Name"
+  default     = "SegmentGroup"
+}
+
+variable "segment_group_description" {
+  type        = string
+  description = "Segment Group Description"
+  default     = "SegmentGroup"
+}
+
+variable "segment_group_enabled" {
+  type        = bool
+  description = "Segment Group Status"
+  default     = true
+}
+
+variable "tcp_keep_alive_enabled" {
+  type        = string
+  description = "Segment Group Keep Alive Status"
+  default     = "1"
+}
+
+# Server Group Variables
+
+variable "server_group_name" {
+  type        = string
+  description = "Server Group Name"
+  default     = "ServerGroup"
+}
+
+variable "server_group_description" {
+  type        = string
+  description = "Server Group Description"
+  default     = "ServerGroup"
+}
+
+variable "server_group_enabled" {
+  type        = bool
+  description = "Server Group Status"
+  default     = true
+}
+
+variable "server_group_dynamic_discovery" {
+  type        = bool
+  description = "Server Group Dynamic Discovery Status"
+  default     = true
+}
+
+

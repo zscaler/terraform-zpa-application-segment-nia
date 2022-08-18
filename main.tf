@@ -27,7 +27,7 @@ resource "zpa_application_segment" "application_segment" {
   lifecycle {
     create_before_destroy = true
   }
-depends_on = [zpa_segment_group.this]
+depends_on = [zpa_segment_group.this, zpa_server_group.this, zpa_app_connector_group.this]
 }
 
 locals {
@@ -38,18 +38,18 @@ locals {
 
 # Segment Group is required as part of the Application Segment Resource
 resource "zpa_segment_group" "this" {
-  name                   = "Consul_TF_Sync"
-  description            = "Consul_TF_Sync"
-  enabled                = true
-  tcp_keep_alive_enabled = "1"
+  name                   = "${var.cts_prefix}${var.segment_group_name}"
+  description            = "${var.cts_prefix}${var.segment_group_description}"
+  enabled                = var.segment_group_enabled
+  tcp_keep_alive_enabled = var.tcp_keep_alive_enabled
 }
 
 # Server Group is required as part of the Application Segment Resource
 resource "zpa_server_group" "this" {
-  name              = "Consul_TF_Sync"
-  description       = "Consul_TF_Sync"
-  enabled           = true
-  dynamic_discovery = true
+  name                   = "${var.cts_prefix}${var.server_group_name}"
+  description            = "${var.cts_prefix}${var.server_group_description}"
+  enabled                = var.server_group_enabled
+  dynamic_discovery      = var.server_group_dynamic_discovery
   app_connector_groups {
     id = [zpa_app_connector_group.this.id]
   }
@@ -57,8 +57,8 @@ resource "zpa_server_group" "this" {
 
 # App Connector Group is required as part of the Server Group Resource
 resource "zpa_app_connector_group" "this" {
-  name                     = "Consul_TF_Sync"
-  description              = "Consul_TF_Sync"
+  name                     = "${var.cts_prefix}AppConnector"
+  description              = "${var.cts_prefix}AppConnector"
   enabled                  = true
   country_code             = "US"
   latitude                 = "37.3382082"

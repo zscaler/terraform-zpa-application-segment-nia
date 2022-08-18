@@ -48,7 +48,6 @@ task {
 
   condition "services" {
     names = ["nginx","web","api"]
-    # regexp = ".*"
   }
 }
 
