@@ -58,6 +58,7 @@ resource "zpa_server_group" "this" {
   }
 }
 
+# This module should assume that an App Connector Group is already deployed
 # App Connector Group is required as part of the Server Group Resource
 resource "zpa_app_connector_group" "this" {
   name                     = "${var.cts_prefix}AppConnector"
