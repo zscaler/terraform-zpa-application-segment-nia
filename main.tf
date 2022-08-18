@@ -77,19 +77,19 @@ data "zpa_server_group" "this" {
 resource "zpa_app_connector_group" "this" {
   count = var.byo_app_connector_group == true ? 1 : 0
 
-  name                          = "${var.cts_prefix}${var.app_connector_group_name}"
-  description                   = "${var.cts_prefix}${var.app_connector_group_description}"
-  enabled                       = true
-  city_country                  = "California, US"
-  country_code                  = "US"
-  latitude                      = "37.3382082"
-  longitude                     = "-121.8863286"
-  location                      = "San Jose, CA, USA"
-  upgrade_day                   = "SUNDAY"
-  upgrade_time_in_secs          = "66600"
-  override_version_profile      = true
-  version_profile_id            = 0
-  dns_query_type                = "IPV4_IPV6"
+  name                     = "${var.cts_prefix}${var.app_connector_group_name}"
+  description              = "${var.cts_prefix}${var.app_connector_group_description}"
+  enabled                  = true
+  city_country             = "California, US"
+  country_code             = "US"
+  latitude                 = "37.3382082"
+  longitude                = "-121.8863286"
+  location                 = "San Jose, CA, USA"
+  upgrade_day              = "SUNDAY"
+  upgrade_time_in_secs     = "66600"
+  override_version_profile = true
+  version_profile_id       = 0
+  dns_query_type           = "IPV4_IPV6"
 }
 
 # Or reference an existing App Connector Group

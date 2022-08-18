@@ -5,6 +5,7 @@ terraform {
       version = "~> 2.3.0"
     }
   }
+  required_version = ">= 0.13"
 }
 
 provider "zpa" {
@@ -18,7 +19,7 @@ provider "zpa" {
 #   zpa_customer_id = "zpa_customer_id"
 # }
 
-module "zpa-application-segment_module" {
+module "zpa_application_segment_module" {
   # source   = "github.com/zscaler/terraform-zpa-application-segment-nia"
   source   = "../"
   services = var.services
