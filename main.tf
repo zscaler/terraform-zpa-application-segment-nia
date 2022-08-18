@@ -10,7 +10,7 @@ terraform {
 resource "zpa_application_segment" "application_segment" {
   for_each         = local.consul_services
 
-  name             = replace("${var.appsegment_prefix}${each.key}${var.appsegment_suffix}", "/[^0-9A-Za-z]/", "-")
+  name             = replace("${var.appsegment_prefix}${each.key}", "/[^0-9A-Za-z]/", "-")
   description      = "Dynamic application segment generated for service ${each.key} registered in Consul"
   enabled          = true
   is_cname_enabled = true
@@ -19,8 +19,15 @@ resource "zpa_application_segment" "application_segment" {
   icmp_access_type = var.icmp_access_type
   domain_names     = [for s in each.value : s.address]
   segment_group_id = zpa_segment_group.this.id
-  tcp_port_ranges  = ["80", "80"]
-
+  tcp_port_ranges  = [for s in each.value : s.port]
+  # udp_port_ranges  = [for s in each.value : s.port]
+  # dynamic "tcp_port_range" {
+  #   for_each = local.tcp_port_range
+  #   content {
+  #     from = tcp_port_range.value
+  #     to = tcp_port_range.value
+  #   }
+  # }
   server_groups {
     id = [zpa_server_group.this.id]
   }
@@ -28,12 +35,6 @@ resource "zpa_application_segment" "application_segment" {
     create_before_destroy = true
   }
 depends_on = [zpa_segment_group.this, zpa_server_group.this, zpa_app_connector_group.this]
-}
-
-locals {
-  consul_services = {
-    for id, s in var.services : s.name => s... if s.status == "passing"
-  }
 }
 
 # Segment Group is required as part of the Application Segment Resource

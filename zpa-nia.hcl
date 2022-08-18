@@ -18,11 +18,6 @@ consul {
   address = "10.0.31.151:8500"
 }
 
-# # Consul Config Options
-# consul {
-#   address = "consul-server-address:8500"
-# }
-
 # Terraform Driver Options
 driver "terraform" {
   log = true
@@ -43,29 +38,10 @@ terraform_provider "zpa" {
 task {
   name = "zpa_application_segment_update"
   description = "Application Segment based on service definition"
-  module = "./"
+  module = "github.com/zscaler/terraform-zpa-application-segment-nia"
   providers = ["zpa"]
 
   condition "services" {
     names = ["nginx","web","api"]
   }
 }
-
-# Zscaler Private Access Workflow Options
-# terraform_provider "zpa" {
-#   zpa_client_id = "zpa_client_id"
-#   zpa_client_secret = "zpa_client_secret"
-#   zpa_customer_id = "zpa_customer_id"
-# }
-
-# task {
-#   name = "zpa_application_segment_update"
-#   description = "Application Segment based on service definition"
-#   module = "/terraform-zpa-consul-sync-nia"
-#   providers = ["zpa"]
-
-#   condition "services" {
-#     names = ["nginx", "web", "api"]
-#   }
-#   variable_files = "terraform-zpa-consul-sync-nia/example/terraform.tfvars"
-# }

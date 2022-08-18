@@ -28,19 +28,13 @@ variable "appsegment_prefix" {
   default     = ""
 }
 
-variable "appsegment_suffix" {
-  type        = string
-  description = "(Optional) Suffix added to the dynamic application segment created by Consul"
-  default     = ""
-}
-
 variable "cts_prefix" {
   type        = string
   description = "(Optional) Prefix that will be applied to all objects created via Consul-Terraform-Sync"
   default     = "cts-"
 }
 
-
+# Application Segment Variables
 variable "health_reporting" {
   type        = string
   description = "Health reporting for the application segment created by Consul-Terraform-Sync. "
@@ -97,7 +91,6 @@ variable "tcp_keep_alive_enabled" {
 }
 
 # Server Group Variables
-
 variable "server_group_name" {
   type        = string
   description = "Server Group Name"
