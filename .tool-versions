@@ -1,0 +1,4 @@
+terraform 1.2.7
+terraform-docs 0.16.0
+pre-commit 2.20.0
+vault 1.11.2

@@ -22,6 +22,9 @@ variable "services" {
   )
 }
 
+################################################################################
+# Optional Prefix
+################################################################################
 variable "appsegment_prefix" {
   type        = string
   description = "(Optional) Prefix added to the dynamic application segment created by Consul"
@@ -34,7 +37,9 @@ variable "cts_prefix" {
   default     = "cts-"
 }
 
+################################################################################
 # Application Segment Variables
+################################################################################
 variable "health_reporting" {
   type        = string
   description = "Health reporting for the application segment created by Consul-Terraform-Sync. "
@@ -65,22 +70,36 @@ variable "bypass_type" {
   default = "NEVER"
 }
 
+################################################################################
 # Segment Group Variables
+################################################################################
+variable "byo_segment_group" {
+  type        = bool
+  description = "Bring your own ZPA Segment Group"
+  default     = false
+}
+
+variable "byo_segment_group_id" {
+  type        = string
+  description = "User provided existing ZPA Segment Group"
+  default     = null
+}
+
 variable "segment_group_name" {
   type        = string
-  description = "Segment Group Name"
+  description = "Name of the segment group."
   default     = "SegmentGroup"
 }
 
 variable "segment_group_description" {
   type        = string
-  description = "Segment Group Description"
+  description = "Description of the segment group."
   default     = "SegmentGroup"
 }
 
 variable "segment_group_enabled" {
   type        = bool
-  description = "Segment Group Status"
+  description = "Whether this segment group is enabled or not."
   default     = true
 }
 
@@ -90,29 +109,138 @@ variable "tcp_keep_alive_enabled" {
   default     = "1"
 }
 
+################################################################################
 # Server Group Variables
+################################################################################
+variable "byo_server_group" {
+  type        = bool
+  description = "Bring your own Server Group"
+  default     = false
+}
+
+variable "byo_server_group_id" {
+  type        = string
+  description = "User provided existing Server Group ID"
+  default     = null
+}
+
 variable "server_group_name" {
   type        = string
-  description = "Server Group Name"
+  description = "This field defines the name of the server group."
   default     = "ServerGroup"
 }
 
 variable "server_group_description" {
   type        = string
-  description = "Server Group Description"
+  description = "This field is the description of the server group."
   default     = "ServerGroup"
 }
 
 variable "server_group_enabled" {
   type        = bool
-  description = "Server Group Status"
+  description = "This field defines if the server group is enabled or disabled."
   default     = true
 }
 
 variable "server_group_dynamic_discovery" {
   type        = bool
-  description = "Server Group Dynamic Discovery Status"
+  description = "This field controls dynamic discovery of the servers."
   default     = true
 }
 
+################################################################################
+# App Connector Group Variables
+################################################################################
+variable "byo_app_connector_group" {
+  type        = bool
+  description = "Bring your own App Connector Group"
+  default     = false
+}
 
+variable "byo_app_connector_group_id" {
+  type        = string
+  description = "User provided existing App Connector Group ID"
+  default     = null
+}
+
+variable "app_connector_group_name" {
+  type        = string
+  description = "Name of the App Connector Group."
+  default     = "AppConnector"
+}
+
+variable "app_connector_group_description" {
+  type        = string
+  description = "Description of the App Connector Group."
+  default     = "AppConnector"
+}
+
+/*
+variable "app_connector_group_latitude" {
+  type        = string
+  description = "	Latitude of the App Connector Group."
+  validation {
+    condition = (
+      var.app_connector_group_latitude >= "-90" &&
+      var.app_connector_group_latitude >= "90"
+    )
+    error_message = "Latitude must be between -90 and 90."
+  }
+    default = "-121.8863286"
+}
+
+variable "app_connector_group_longitude" {
+  type        = string
+  description = "	Longitude of the App Connector Group."
+  validation {
+    condition = (
+      var.app_connector_group_longitude >= "-180" &&
+      var.app_connector_group_longitude >= "180"
+    )
+    error_message = "Longitude must be between -180 and 180."
+  }
+  default = "37.3382082"
+}
+
+variable "app_connector_group_country_code" {
+  type        = string
+  description = "Code of the Country where the app connector is located i.e US or CA"
+  default     = null
+}
+
+variable "app_connector_group_location" {
+  type        = string
+  description = "Location of the App Connector Group."
+  default     = null
+}
+
+variable "app_connector_group_upgrade_day" {
+  type        = string
+  description = "App Connectors in this group will attempt to update to a newer version of the software during this specified day."
+  default     = "SUNDAY"
+}
+
+variable "app_connector_group_upgrade_time_in_secs" {
+  type        = string
+  description = "App Connectors in this group will attempt to update to a newer version of the software during this specified time."
+  default     = "66600"
+}
+
+variable "app_connector_group_override_version_profile" {
+  type        = bool
+  description = "Whether the default version profile of the App Connector Group is applied or overridden."
+  default     = true
+}
+
+variable "app_connector_group_version_profile_id" {
+  type        = string
+  description = "ID of the version profile"
+  default     = "2"
+}
+
+variable "app_connector_group_dns_query_type" {
+  type        = string
+  description = "Whether to enable IPv4 or IPv6, or both, for DNS resolution of all applications in the App Connector Group."
+  default     = "IPV4_IPV6"
+}
+*/

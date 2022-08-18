@@ -10,7 +10,7 @@ buffer_period {
   max = "20s"
 }
 
-# Vault Config Options
+# Vault Config Options (Optional)
 vault {}
 
 # Consul Config Options
@@ -38,7 +38,7 @@ terraform_provider "zpa" {
 task {
   name = "zpa_application_segment_update"
   description = "Application Segment based on service definition"
-  module = "./"
+  module = "../"
   # module = "github.com/zscaler/terraform-zpa-application-segment-nia"
   # version = "0.0.1" # Optional
   providers = ["zpa"]
@@ -46,4 +46,5 @@ task {
   condition "services" {
     names = ["nginx","web","api"]
   }
+  variable_files = "./terraform.tfvars"
 }
