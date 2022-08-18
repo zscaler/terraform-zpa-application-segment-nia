@@ -38,7 +38,8 @@ terraform_provider "zpa" {
 task {
   name = "zpa_application_segment_update"
   description = "Application Segment based on service definition"
-  module = "github.com/zscaler/terraform-zpa-application-segment-nia"
+  module = "./"
+  # module = "github.com/zscaler/terraform-zpa-application-segment-nia"
   # version = "0.0.1" # Optional
   providers = ["zpa"]
 
