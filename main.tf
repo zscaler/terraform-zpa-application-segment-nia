@@ -11,7 +11,7 @@ resource "zpa_application_segment" "application_segment" {
   for_each         = local.consul_services
 
   name             = replace("${var.appsegment_prefix}${each.key}", "/[^0-9A-Za-z]/", "-")
-  description      = "Dynamic application segment generated for service ${each.key} registered in Consul"
+  description      = "Service for ${var.cts_prefix}${each.key} created by Consul-Terraform-Sync"
   enabled          = true
   is_cname_enabled = true
   health_reporting = var.health_reporting
@@ -20,6 +20,8 @@ resource "zpa_application_segment" "application_segment" {
   domain_names     = [for s in each.value : s.address]
   segment_group_id = zpa_segment_group.this.id
   tcp_port_ranges  = [for s in each.value : s.port]
+
+  # UDP Port is optional - Add if needed
   # udp_port_ranges  = [for s in each.value : s.port]
   # dynamic "tcp_port_range" {
   #   for_each = local.tcp_port_range

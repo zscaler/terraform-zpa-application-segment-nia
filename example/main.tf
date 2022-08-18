@@ -7,6 +7,7 @@ terraform {
   }
 }
 
+vault {}
 provider "zpa" {
   zpa_client_id = "{{ with secret \"zscaler/zpacloud\" }}{{ .Data.data.client_id }}{{ end }}"
   zpa_client_secret = "{{ with secret \"zscaler/zpacloud\" }}{{ .Data.data.client_secret }}{{ end }}"
@@ -18,7 +19,7 @@ provider "zpa" {
 #   zpa_customer_id = "zpa_customer_id"
 # }
 
-module "application_segment_module" {
-  source   = "../"
+module "zpa-application-segment_module" {
+  source   = "github.com/zscaler/terraform-zpa-application-segment-nia"
   services = var.services
 }
