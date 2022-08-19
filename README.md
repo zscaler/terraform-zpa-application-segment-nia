@@ -277,148 +277,85 @@ If a task and is defined, one or more services are associated with the task, pro
 
          example terraform.tfvars
          ```terraform
-         services = {
-           "api2" : {
-             id              = "api2"
-             name            = "api"
-             address         = "172.31.29.206"
-             port            = 8090
-             meta            = {}
-             tags            = ["api", "dc1", "test"]
-             namespace       = null
-             status          = "passing"
-             node            = "i-03a2d3e5efc9df8fc"
-             node_id         = "a179f33b-b4b5-bf85-1ba3-a8d29546dbfb"
-             node_address    = "172.31.29.206"
-             node_datacenter = "us-east-1"
-             node_tagged_addresses = {
-               lan      = "172.31.29.206"
-               lan_ipv4 = "172.31.29.206"
-               wan      = "172.31.29.206"
-               wan_ipv4 = "172.31.29.206"
-             }
-             node_meta = {
-               consul-network-segment = ""
-             }
-           },
-           "api1" : {
-             id              = "api1"
-             name            = "api"
-             address         = "172.31.13.27"
-             port            = 8090
-             meta            = {}
-             tags            = ["api", "dc1", "test"]
-             namespace       = null
-             status          = "passing"
-             node            = "i-06535c245da7eb639"
-             node_id         = "3d32e036-8b5f-2528-6a08-153ee6246072"
-             node_address    = "172.31.13.27"
-             node_datacenter = "us-east-1"
-             node_tagged_addresses = {
-               lan      = "172.31.13.27"
-               lan_ipv4 = "172.31.13.27"
-               wan      = "172.31.13.27"
-               wan_ipv4 = "172.31.13.27"
-             }
-             node_meta = {
-               consul-network-segment = ""
-             }
-           },
-           "api0" : {
-             id              = "api0"
-             name            = "api"
-             address         = "172.31.94.1"
-             port            = 8090
-             meta            = {}
-             tags            = ["api", "dc1", "test"]
-             namespace       = null
-             status          = "passing"
-             node            = "i-0d61132ea5ad3c0bf"
-             node_id         = "d7d41dc5-7b60-3dbb-0537-6abcf453daa9"
-             node_address    = "172.31.94.1"
-             node_datacenter = "us-east-1"
-             node_tagged_addresses = {
-               lan      = "172.31.94.1"
-               lan_ipv4 = "172.31.94.1"
-               wan      = "172.31.94.1"
-               wan_ipv4 = "172.31.94.1"
-             }
-             node_meta = {
-               consul-network-segment = ""
-             }
-           },
-           "web0" : {
-             id              = "web0"
-             name            = "web"
-             address         = "172.31.43.78"
-             port            = 80
-             meta            = {}
-             tags            = ["dc1", "nginx", "test", "web"]
-             namespace       = null
-             status          = "passing"
-             node            = "i-08040820d8d7c4984"
-             node_id         = "63844302-407d-5cc6-a618-a9e5caad1d1f"
-             node_address    = "172.31.43.78"
-             node_datacenter = "us-east-1"
-             node_tagged_addresses = {
-               lan      = "172.31.43.78"
-               lan_ipv4 = "172.31.43.78"
-               wan      = "172.31.43.78"
-               wan_ipv4 = "172.31.43.78"
-             }
-             node_meta = {
-               consul-network-segment = ""
-             }
-           },
-           "web3" : {
-             id              = "web3"
-             name            = "web"
-             address         = "192.168.128.17"
-             port            = 80
-             meta            = {}
-             tags            = ["dc1", "nginx", "test", "web"]
-             namespace       = null
-             status          = "passing"
-             node            = "i-0d61132ea5ad3c0bf"
-             node_id         = "d7d41dc5-7b60-3dbb-0537-6abcf453daa9"
-             node_address    = "172.31.94.1"
-             node_datacenter = "us-east-1"
-             node_tagged_addresses = {
-               lan      = "172.31.94.1"
-               lan_ipv4 = "172.31.94.1"
-               wan      = "172.31.94.1"
-               wan_ipv4 = "172.31.94.1"
-             }
-             node_meta = {
-               consul-network-segment = ""
-             }
-           },
-           "web1" : {
-             id              = "web1"
-             name            = "web"
-             address         = "172.31.51.85"
-             port            = 80
-             meta            = {}
-             tags            = ["dc1", "nginx", "test", "web"]
-             namespace       = null
-             status          = "passing"
-             node            = "i-0f92f7eb4b6fb460a"
-             node_id         = "778506df-a1b2-65e0-fe1e-eafd2d1162a8"
-             node_address    = "172.31.51.85"
-             node_datacenter = "us-east-1"
-             node_tagged_addresses = {
-               lan      = "172.31.51.85"
-               lan_ipv4 = "172.31.51.85"
-               wan      = "172.31.51.85"
-               wan_ipv4 = "172.31.51.85"
-             }
-             node_meta = {
-               consul-network-segment = ""
-             }
-           }
-         }
+              services = {
+                "web.hpc152-nginx.sgio01" = {
+                  id              = "web"
+                  name            = "web"
+                  kind            = ""
+                  address         = "10.0.31.152"
+                  port            = 80
+                  meta            = {}
+                  tags            = []
+                  namespace       = ""
+                  status          = "passing"
+                  node            = "hpc152-nginx"
+                  node_id         = "517051df-974b-5765-9941-6399f2679106"
+                  node_address    = "10.0.31.152"
+                  node_datacenter = "dc01"
+                  node_tagged_addresses = {
+                    lan      = "10.0.31.152"
+                    lan_ipv4 = "10.0.31.152"
+                    wan      = "10.0.31.152"
+                    wan_ipv4 = "10.0.31.152"
+                  }
+                  node_meta = {
+                    consul-network-segment = ""
+                  }
+                  cts_user_defined_meta = {}
+                },
+                "web.hpc153-nginx.sgio01" = {
+                  id              = "web"
+                  name            = "web"
+                  kind            = ""
+                  address         = "10.0.31.153"
+                  port            = 80
+                  meta            = {}
+                  tags            = []
+                  namespace       = ""
+                  status          = "passing"
+                  node            = "hpc153-nginx"
+                  node_id         = "2504f4de-287a-0fe1-dd78-6c313ba0cb58"
+                  node_address    = "10.0.31.153"
+                  node_datacenter = "dc01"
+                  node_tagged_addresses = {
+                    lan      = "10.0.31.153"
+                    lan_ipv4 = "10.0.31.153"
+                    wan      = "10.0.31.153"
+                    wan_ipv4 = "10.0.31.153"
+                  }
+                  node_meta = {
+                    consul-network-segment = ""
+                  }
+                  cts_user_defined_meta = {}
+                },
+                "web.hpc154-nginx.sgio01" = {
+                  id              = "web"
+                  name            = "web"
+                  kind            = ""
+                  address         = "10.0.31.154"
+                  port            = 80
+                  meta            = {}
+                  tags            = []
+                  namespace       = ""
+                  status          = "passing"
+                  node            = "hpc154-nginx"
+                  node_id         = "8af55392-5756-2511-77e7-1b6f0627ff5f"
+                  node_address    = "10.0.31.154"
+                  node_datacenter = "dc01"
+                  node_tagged_addresses = {
+                    lan      = "10.0.31.154"
+                    lan_ipv4 = "10.0.31.154"
+                    wan      = "10.0.31.154"
+                    wan_ipv4 = "10.0.31.154"
+                  }
+                  node_meta = {
+                    consul-network-segment = ""
+                  }
+                  cts_user_defined_meta = {}
+                },
+              }
+      ```
 
-         ```
       * **Network Infrastructure Automation (NIA) compatible modules are built to utilize the above service variables**
     6. **consul-terraform-sync** manages the entire Terraform workflow of plan, apply and destroy for all the individual workspaces corrresponding to the defined     "tasks" based on the updates to the services to those tasks.
 
