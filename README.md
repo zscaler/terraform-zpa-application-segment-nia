@@ -161,21 +161,6 @@ $ consul-terraform-sync -config-file=tasks.hcl
 
 **~> Note:** If you are interested in how **consul-terraform-sync** works, please refer to this [section](#how-does-consul-terraform-sync-work).
 
-## Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| appsegment\_prefix | Prefix to be added to the application segment on ZPA created by consul-terraform-sync | `string` |  | no |
-| appsegment\_prefix | Suffix to be added to the application segment on ZPA created by consul-terraform-sync | `string` |  | no |
-| services | Consul services monitored by consul-terraform-sync | <pre>map(<br>    object({<br>      id        = string<br>      name      = string<br>      address   = string<br>      port      = number<br>      meta      = map(string)<br>      tags      = list(string)<br>      namespace = string<br>      status    = string<br><br>      node                  = string<br>      node_id               = string<br>      node_address          = string<br>      node_datacenter       = string<br>      node_tagged_addresses = map(string)<br>      node_meta             = map(string)<br>    })<br>  )</pre> | n/a | yes |
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| application\_segment | Name of the application segment dynamically created in the ZPA cloud through consul-terraform-sync |
-
-
 ## How does consul-terraform-sync work?
 
 There are 2 aspects of consul-terraform-sync.
