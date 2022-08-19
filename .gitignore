@@ -38,6 +38,7 @@ secrets.tfvars
 terraform.auto.tfvars
 
 
+example/sync-tasks
 /sync-tasks
 ./sync-tasks
 .terraform/
