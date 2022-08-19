@@ -1,3 +1,9 @@
+################################################################################
+# ZPA Application Segment
+################################################################################
+# Create a Application Segment
+# https://help.zscaler.com/zpa/application-segment-use-cases
+
 resource "zpa_application_segment" "application_segment" {
   for_each = local.consul_services
 
@@ -27,6 +33,7 @@ resource "zpa_application_segment" "application_segment" {
 # ZPA Segment Group
 ################################################################################
 # Create a Segment Group
+# https://help.zscaler.com/zpa/application-segment-group-use-cases
 resource "zpa_segment_group" "this" {
   count = var.byo_segment_group == true ? 1 : 0
 
@@ -42,16 +49,11 @@ data "zpa_segment_group" "this" {
   #name = var.byo_segment_group == true ? zpa_segment_group.this.*.name[0] : var.byo_segment_group_id
 }
 
-# Change both conditions in the resource and data source to dalse and the segment group creation fails (can't find ID and Name)
-# Change both conditions in the resource and data source to true and the segment group is created
-# Change conditions in the resource to false and true in the data source
-# Change condition in the resource to true and false in the data source
-
-
 ################################################################################
 # ZPA Server Group
 ################################################################################
 # Create a Server Group
+# https://help.zscaler.com/zpa/application-server-group-use-cases
 resource "zpa_server_group" "this" {
   count = var.byo_server_group == true ? 1 : 0
 
@@ -74,6 +76,7 @@ data "zpa_server_group" "this" {
 # ZPA App Connector Group
 ################################################################################
 # Create an App Connector Group
+# https://help.zscaler.com/zpa/app-connector-group-use-cases
 resource "zpa_app_connector_group" "this" {
   count = var.byo_app_connector_group == true ? 1 : 0
 
