@@ -1,0 +1,7 @@
+{
+  "ID": "web_1",
+  "Name": "web",
+  "Tags": ["foo"],
+  "Port": 8888,
+  "Check": null
+}
