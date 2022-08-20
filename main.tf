@@ -16,7 +16,6 @@ resource "zpa_application_segment" "this" {
   icmp_access_type = var.icmp_access_type
   domain_names     = [for s in each.value : s.address]
   segment_group_id = data.zpa_segment_group.this.id
-  # segment_group_name = data.zpa_segment_group.this.name
   tcp_port_ranges  = [for s in each.value : s.port]
   # UDP Port is optional - Add if needed
   # udp_port_ranges  = [for s in each.value : s.port]
