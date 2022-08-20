@@ -5,20 +5,20 @@
 ################################################################################
 # Custom Segment Group Variables
 ################################################################################
-#byo_segment_group    = false
-#byo_segment_group_id = "216196257331307900"
+byo_segment_group    = false
+byo_segment_group_id = "216196257331307926"
 
 ################################################################################
 # Custom Server Group Variables
 ################################################################################
-#byo_server_group    = false
-#byo_server_group_id = "216196257331307901"
+byo_server_group    = false
+byo_server_group_id = "216196257331307927"
 
 ################################################################################
 # Custom App Connector Group Variables Values
 ################################################################################
-#byo_app_connector_group    = false
-#byo_app_connector_group_id = "216196257331307899"
+byo_app_connector_group    = false
+byo_app_connector_group_id = "216196257331307925"
 
 # app_connector_group_latitude = "37.3382082"
 # app_connector_group_longitude = "-121.8863286"

@@ -4,7 +4,7 @@
 # Create a Application Segment
 # https://help.zscaler.com/zpa/application-segment-use-cases
 
-resource "zpa_application_segment" "application_segment" {
+resource "zpa_application_segment" "this" {
   for_each = local.consul_services
 
   name             = replace("${var.appsegment_prefix}${each.key}", "/[^0-9A-Za-z]/", "-")
@@ -16,8 +16,8 @@ resource "zpa_application_segment" "application_segment" {
   icmp_access_type = var.icmp_access_type
   domain_names     = [for s in each.value : s.address]
   segment_group_id = data.zpa_segment_group.this.id
+  # segment_group_name = data.zpa_segment_group.this.name
   tcp_port_ranges  = [for s in each.value : s.port]
-
   # UDP Port is optional - Add if needed
   # udp_port_ranges  = [for s in each.value : s.port]
   server_groups {
@@ -26,7 +26,7 @@ resource "zpa_application_segment" "application_segment" {
   lifecycle {
     create_before_destroy = true
   }
-  depends_on = [zpa_segment_group.this, zpa_server_group.this, zpa_app_connector_group.this]
+  depends_on = [data.zpa_segment_group.this, data.zpa_server_group.this, data.zpa_app_connector_group.this]
 }
 
 ################################################################################
@@ -82,17 +82,17 @@ resource "zpa_app_connector_group" "this" {
 
   name                     = "${var.cts_prefix}${var.app_connector_group_name}"
   description              = "${var.cts_prefix}${var.app_connector_group_description}"
-  enabled                  = true
-  city_country             = "California, US"
-  country_code             = "US"
-  latitude                 = "37.3382082"
-  longitude                = "-121.8863286"
-  location                 = "San Jose, CA, USA"
-  upgrade_day              = "SUNDAY"
-  upgrade_time_in_secs     = "66600"
-  override_version_profile = true
-  version_profile_id       = 0
-  dns_query_type           = "IPV4_IPV6"
+  enabled                  = var.app_connector_group_enabled
+  city_country             = var.app_connector_group_city_country
+  country_code             = var.app_connector_group_country_code
+  latitude                 = var.app_connector_group_latitude
+  longitude                = var.app_connector_group_longitude
+  location                 = var.app_connector_group_location
+  upgrade_day              = var.app_connector_group_upgrade_day
+  upgrade_time_in_secs     = var.app_connector_group_upgrade_time_in_secs
+  override_version_profile = var.app_connector_group_override_version_profile
+  version_profile_id       = var.app_connector_group_version_profile_id
+  dns_query_type           = var.app_connector_group_dns_query_type
 }
 
 # Or reference an existing App Connector Group

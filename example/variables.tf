@@ -40,6 +40,13 @@ variable "cts_prefix" {
 ################################################################################
 # Application Segment Variables
 ################################################################################
+
+# variable "domain" {
+#   type        = string
+#   description = "User provided existing Segment Group ID"
+#   default     = null
+# }
+
 variable "health_reporting" {
   type        = string
   description = "Health reporting for the application segment created by Consul-Terraform-Sync. "
@@ -173,6 +180,43 @@ variable "app_connector_group_description" {
   type        = string
   description = "Description of the App Connector Group."
   default     = "AppConnector"
+}
+
+variable "app_connector_group_enabled" {
+  type        = bool
+  description = "Whether this App Connector Group is enabled or not."
+  default     = true
+}
+
+
+variable "app_connector_group_latitude" {
+  type        = string
+  description = "Whether this App Connector Group is enabled or not."
+  default     = "37.3382082"
+}
+
+variable "app_connector_group_longitude" {
+  type        = string
+  description = "Whether this App Connector Group is enabled or not."
+  default     = "-121.8863286"
+}
+
+variable "app_connector_group_location" {
+  type        = string
+  description = "Location of the App Connector Group."
+  default     = "San Jose, CA, USA"
+}
+
+variable "app_connector_group_country_code" {
+  type        = string
+  description = "Code of the Country where the app connector is located i.e US or CA"
+  default     = "US"
+}
+
+variable "app_connector_group_city_country" {
+  type        = string
+  description = "Code of the Country where the app connector is located i.e US or CA"
+  default     = "San Jose, US"
 }
 
 /*

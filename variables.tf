@@ -40,6 +40,13 @@ variable "cts_prefix" {
 ################################################################################
 # Application Segment Variables
 ################################################################################
+
+# variable "domain" {
+#   type        = string
+#   description = "User provided existing Segment Group ID"
+#   default     = null
+# }
+
 variable "health_reporting" {
   type        = string
   description = "Health reporting for the application segment created by Consul-Terraform-Sync. "
@@ -174,7 +181,6 @@ variable "app_connector_group_description" {
   default     = "AppConnector"
 }
 
-/*
 variable "app_connector_group_enabled" {
   type        = bool
   description = "Whether this App Connector Group is enabled or not."
@@ -183,40 +189,33 @@ variable "app_connector_group_enabled" {
 
 variable "app_connector_group_latitude" {
   type        = string
-  description = "	Latitude of the App Connector Group."
-  validation {
-    condition = (
-      var.app_connector_group_latitude >= "-90" &&
-      var.app_connector_group_latitude >= "90"
-    )
-    error_message = "Latitude must be between -90 and 90."
-  }
-      default = "-121.8863286"
+  description = "Whether this App Connector Group is enabled or not."
+  default     = "37.3382082"
 }
+
 
 variable "app_connector_group_longitude" {
   type        = string
-  description = "	Longitude of the App Connector Group."
-  validation {
-    condition = (
-      var.app_connector_group_longitude >= "-180" &&
-      var.app_connector_group_longitude >= "180"
-    )
-    error_message = "Longitude must be between -180 and 180."
-  }
-  default = "37.3382082"
-}
-
-variable "app_connector_group_country_code" {
-  type        = string
-  description = "Code of the Country where the app connector is located i.e US or CA"
-  default     = null
+  description = "Whether this App Connector Group is enabled or not."
+  default     = "-121.8863286"
 }
 
 variable "app_connector_group_location" {
   type        = string
   description = "Location of the App Connector Group."
-  default     = null
+  default     = "San Jose, CA, USA"
+}
+
+variable "app_connector_group_country_code" {
+  type        = string
+  description = "Code of the Country where the app connector is located i.e US or CA"
+  default     = "US"
+}
+
+variable "app_connector_group_city_country" {
+  type        = string
+  description = "Code of the Country where the app connector is located i.e US or CA"
+  default     = "San Jose, US"
 }
 
 variable "app_connector_group_upgrade_day" {
@@ -248,4 +247,20 @@ variable "app_connector_group_dns_query_type" {
   description = "Whether to enable IPv4 or IPv6, or both, for DNS resolution of all applications in the App Connector Group."
   default     = "IPV4_IPV6"
 }
+
+/*
+
+variable "app_connector_group_country_code" {
+  type        = string
+  description = "Code of the Country where the app connector is located i.e US or CA"
+  default     = null
+}
+
+variable "app_connector_group_location" {
+  type        = string
+  description = "Location of the App Connector Group."
+  default     = null
+}
+
+
 */
