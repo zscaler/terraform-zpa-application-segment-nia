@@ -17,6 +17,7 @@ resource "zpa_application_segment" "this" {
   domain_names     = [for s in each.value : s.address]
   segment_group_id = data.zpa_segment_group.this.id
   tcp_port_ranges  = [for s in each.value : s.port]
+
   # UDP Port is optional - Add if needed
   # udp_port_ranges  = [for s in each.value : s.port]
   server_groups {
