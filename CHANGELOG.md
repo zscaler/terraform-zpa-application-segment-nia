@@ -4,6 +4,6 @@
 
 ### Notes
 
-- Release date: **(xx, xx 20xx)**
+- Release date: **(September, 22 20xx)**
 - Supported Terraform version: **v1.x**
 - Support Consul-Terraform-Sync: **v0.6.0**
