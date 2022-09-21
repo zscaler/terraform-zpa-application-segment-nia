@@ -46,3 +46,7 @@ example/sync-tasks
 *.backup
 terraform
 local_test
+./test
+.test/
+*_CONTRIBUTING.md
+CONTRIBUTING.md

@@ -1,4 +1,17 @@
 ################################################################################
+# Local Variables to Support Application Segment Domain Names and Ports
+################################################################################
+locals {
+  consul_services = {
+    # Set the value of id as the key for the map
+    for k, v in var.services : v.name => {
+      # Set the value of name, the ip address of the node - iterating via key, and setting the port
+      domain_names = (var.services[k].node_address != "" ? var.services[k].node : var.services[k].address), src_port_start = v.port, src_port_end = v.port
+    }...
+  }
+}
+
+################################################################################
 # ZPA Application Segment
 ################################################################################
 # Create a Application Segment
@@ -14,12 +27,11 @@ resource "zpa_application_segment" "this" {
   health_reporting = var.health_reporting
   bypass_type      = var.bypass_type
   icmp_access_type = var.icmp_access_type
-  domain_names     = [for s in each.value : s.address]
+  domain_names     = each.value.*.domain_names
   segment_group_id = data.zpa_segment_group.this.id
-  tcp_port_ranges  = [for s in each.value : s.port]
-
+  tcp_port_ranges  = [one(distinct(each.value.*.src_port_start)), one(distinct(each.value.*.src_port_end))]
   # UDP Port is optional - Add if needed
-  # udp_port_ranges  = [for s in each.value : s.port]
+  # udp_port_ranges  = distinct(each.value.*.port)
   server_groups {
     id = [data.zpa_server_group.this.id]
   }

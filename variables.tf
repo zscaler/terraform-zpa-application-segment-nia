@@ -247,20 +247,3 @@ variable "app_connector_group_dns_query_type" {
   description = "Whether to enable IPv4 or IPv6, or both, for DNS resolution of all applications in the App Connector Group."
   default     = "IPV4_IPV6"
 }
-
-/*
-
-variable "app_connector_group_country_code" {
-  type        = string
-  description = "Code of the Country where the app connector is located i.e US or CA"
-  default     = null
-}
-
-variable "app_connector_group_location" {
-  type        = string
-  description = "Location of the App Connector Group."
-  default     = null
-}
-
-
-*/
