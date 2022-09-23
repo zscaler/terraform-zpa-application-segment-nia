@@ -31,7 +31,7 @@ resource "zpa_application_segment" "this" {
   segment_group_id = data.zpa_segment_group.this.id
   tcp_port_ranges  = [one(distinct(each.value.*.src_port_start)), one(distinct(each.value.*.src_port_end))]
   # UDP Port is optional - Add if needed
-  # udp_port_ranges  = distinct(each.value.*.port)
+  # udp_port_ranges  = = [one(distinct(each.value.*.src_port_start)), one(distinct(each.value.*.src_port_end))]
   server_groups {
     id = [data.zpa_server_group.this.id]
   }
@@ -47,7 +47,7 @@ resource "zpa_application_segment" "this" {
 # Create a Segment Group
 # https://help.zscaler.com/zpa/application-segment-group-use-cases
 resource "zpa_segment_group" "this" {
-  count = var.byo_segment_group == true ? 1 : 0
+  count = var.byo_segment_group ? 1 : 0
 
   name                   = "${var.cts_prefix}${var.segment_group_name}"
   description            = "${var.cts_prefix}${var.segment_group_description}"
@@ -67,7 +67,8 @@ data "zpa_segment_group" "this" {
 # Create a Server Group
 # https://help.zscaler.com/zpa/application-server-group-use-cases
 resource "zpa_server_group" "this" {
-  count = var.byo_server_group == true ? 1 : 0
+  count = var.byo_server_group ? 1 : 0
+  # count = var.byo_server_group == true ? 1 : 0
 
   name              = "${var.cts_prefix}${var.server_group_name}"
   description       = "${var.cts_prefix}${var.server_group_description}"
@@ -90,7 +91,8 @@ data "zpa_server_group" "this" {
 # Create an App Connector Group
 # https://help.zscaler.com/zpa/app-connector-group-use-cases
 resource "zpa_app_connector_group" "this" {
-  count = var.byo_app_connector_group == true ? 1 : 0
+  count = var.byo_app_connector_group ? 1 : 0
+  # count = var.byo_app_connector_group == true ? 1 : 0
 
   name                     = "${var.cts_prefix}${var.app_connector_group_name}"
   description              = "${var.cts_prefix}${var.app_connector_group_description}"
