@@ -16,7 +16,7 @@ buffer_period {
 
 # Vault Config Options (Optional)
 # Only required if you are using Vault to retrieve ZPA API Credentials
-# vault {}
+vault {}
 
 # Consul Config Options
 consul {
@@ -33,25 +33,27 @@ driver "terraform" {
   }
 }
 
-/*
+
 # For Customer utilizing Vault to Store ZPA API Credentials, enable this field
 terraform_provider "zpa" {
   zpa_client_id = "{{ with secret \"zscaler/zpacloud\" }}{{ .Data.data.client_id }}{{ end }}"
   zpa_client_secret = "{{ with secret \"zscaler/zpacloud\" }}{{ .Data.data.client_secret }}{{ end }}"
   zpa_customer_id = "{{ with secret \"zscaler/zpacloud\" }}{{ .Data.data.customer_id }}{{ end }}"
 }
-*/
 
+/*
 terraform_provider "zpa" {
   zpa_client_id = ""
   zpa_client_secret = ""
   zpa_customer_id = ""
 }
+*/
 
 task {
   name = "zpa_application_segment_update"
   description = "This task dynamically updates application segments domain names, tcp and udp ports"
-  module = "github.com/zscaler/terraform-zpa-application-segment-nia"
+  # module = "github.com/zscaler/terraform-zpa-application-segment-nia"
+  module = "../"
   providers = ["zpa"]
   condition "services" {
     names = ["nginx","web","api"]

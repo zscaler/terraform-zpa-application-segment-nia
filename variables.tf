@@ -41,40 +41,46 @@ variable "cts_prefix" {
 # Application Segment Variables
 ################################################################################
 
-# variable "domain" {
-#   type        = string
-#   description = "User provided existing Segment Group ID"
-#   default     = null
-# }
+variable "app_segment_enabled" {
+  type        = bool
+  description = "Indicates if the Zscaler Client Connector receives CNAME DNS records from the connectors"
+  default     = true
+}
 
-variable "health_reporting" {
+variable "app_segment_health_reporting" {
   type        = string
   description = "Health reporting for the application segment created by Consul-Terraform-Sync. "
   validation {
-    condition     = var.health_reporting != "NONE" || var.health_reporting != "ON_ACCESS" || var.health_reporting != "CONTINUOUS"
+    condition     = var.app_segment_health_reporting != "NONE" || var.app_segment_health_reporting != "ON_ACCESS" || var.app_segment_health_reporting != "CONTINUOUS"
     error_message = "The variable health_reporting must be \"NONE\", \"ON_ACCESS\", or \"CONTINUOUS\"."
   }
   default = "ON_ACCESS"
 }
 
-variable "icmp_access_type" {
+variable "app_segment_icmp_access_type" {
   type        = string
   description = "ICMP Access Type for the application segment created by Consul-Terraform-Sync. "
   validation {
-    condition     = var.icmp_access_type != "NONE" || var.icmp_access_type != "PING" || var.icmp_access_type != "PING_TRACEROUTING"
+    condition     = var.app_segment_icmp_access_type != "NONE" || var.app_segment_icmp_access_type != "PING" || var.app_segment_icmp_access_type != "PING_TRACEROUTING"
     error_message = "The variable icmp_access_type must be \"NONE\", \"PING\", or \"PING_TRACEROUTING\"."
   }
   default = "NONE"
 }
 
-variable "bypass_type" {
+variable "app_segment_bypass_type" {
   type        = string
   description = "Bypass Type for the application segment created by Consul-Terraform-Sync. "
   validation {
-    condition     = var.bypass_type != "NEVER" || var.bypass_type != "ALWAYS" || var.bypass_type != "ON_NET"
+    condition     = var.app_segment_bypass_type != "NEVER" || var.app_segment_bypass_type != "ALWAYS" || var.app_segment_bypass_type != "ON_NET"
     error_message = "The variable bypass_type must be \"NEVER\", \"ALWAYS\", or \"ON_NET\"."
   }
   default = "NEVER"
+}
+
+variable "app_segment_is_cname_enabled" {
+  type        = bool
+  description = "Indicates if the Zscaler Client Connector receives CNAME DNS records from the connectors"
+  default     = true
 }
 
 ################################################################################
@@ -84,6 +90,12 @@ variable "byo_segment_group" {
   type        = bool
   description = "Bring your own Segment Group"
   default     = false
+}
+
+variable "byo_segment_group_name" {
+  type        = string
+  description = "User provided existing Segment Group ID"
+  default     = null
 }
 
 variable "byo_segment_group_id" {
@@ -110,7 +122,7 @@ variable "segment_group_enabled" {
   default     = true
 }
 
-variable "tcp_keep_alive_enabled" {
+variable "segment_group_tcp_keep_alive_enabled" {
   type        = string
   description = "Segment Group Keep Alive Status"
   default     = "1"
@@ -124,12 +136,18 @@ variable "byo_server_group" {
   description = "Bring your own Server Group"
   default     = false
 }
-variable "byo_server_group_id" {
+
+variable "byo_server_group_name" {
   type        = string
   description = "User provided existing Server Group ID"
   default     = null
 }
 
+variable "byo_server_group_id" {
+  type        = string
+  description = "User provided existing Server Group ID"
+  default     = null
+}
 variable "server_group_name" {
   type        = string
   description = "This field defines the name of the server group."
@@ -163,6 +181,12 @@ variable "byo_app_connector_group" {
   default     = false
 }
 
+variable "byo_app_connector_group_name" {
+  type        = string
+  description = "User provided existing App Connector Group ID"
+  default     = null
+}
+
 variable "byo_app_connector_group_id" {
   type        = string
   description = "User provided existing App Connector Group ID"
@@ -192,7 +216,6 @@ variable "app_connector_group_latitude" {
   description = "Whether this App Connector Group is enabled or not."
   default     = "37.3382082"
 }
-
 
 variable "app_connector_group_longitude" {
   type        = string
@@ -238,12 +261,20 @@ variable "app_connector_group_override_version_profile" {
 
 variable "app_connector_group_version_profile_id" {
   type        = string
-  description = "ID of the version profile"
-  default     = "2"
+  description = "ICMP Access Type for the application segment created by Consul-Terraform-Sync. "
+  validation {
+    condition     = var.app_connector_group_version_profile_id != "0" || var.app_connector_group_version_profile_id != "1" || var.app_connector_group_version_profile_id != "2"
+    error_message = "The variable icmp_access_type must be \"0 for Default \", \"1 for Previous Default\", or \"2 for New Release\"."
+  }
+  default = "2"
 }
 
 variable "app_connector_group_dns_query_type" {
   type        = string
-  description = "Whether to enable IPv4 or IPv6, or both, for DNS resolution of all applications in the App Connector Group."
-  default     = "IPV4_IPV6"
+  description = "ICMP Access Type for the application segment created by Consul-Terraform-Sync. "
+  validation {
+    condition     = var.app_connector_group_dns_query_type != "IPV4" || var.app_connector_group_dns_query_type != "IPV6" || var.app_connector_group_dns_query_type != "IPV4_IPV6"
+    error_message = "The variable icmp_access_type must be \"IPV4\", \"IPV6\", or \"IPV4_IPV6\"."
+  }
+  default = "IPV4_IPV6"
 }

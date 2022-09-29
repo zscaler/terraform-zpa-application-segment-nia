@@ -1,5 +1,5 @@
 ################################################################################
-# Local Variables to Support Application Segment Domain Names and Ports
+# Local Variables to Support Application Segment Domain Names, TCP and UDP Ports
 ################################################################################
 locals {
   consul_services = {
@@ -22,16 +22,16 @@ resource "zpa_application_segment" "this" {
 
   name             = replace("${var.appsegment_prefix}${each.key}", "/[^0-9A-Za-z]/", "-")
   description      = "Service for ${var.cts_prefix}${each.key} created by Consul-Terraform-Sync"
-  enabled          = true
-  is_cname_enabled = true
-  health_reporting = var.health_reporting
-  bypass_type      = var.bypass_type
-  icmp_access_type = var.icmp_access_type
+  enabled          = var.app_segment_enabled
+  is_cname_enabled = var.app_segment_is_cname_enabled
+  health_reporting = var.app_segment_health_reporting
+  bypass_type      = var.app_segment_bypass_type
+  icmp_access_type = var.app_segment_icmp_access_type
   domain_names     = each.value.*.domain_names
   segment_group_id = data.zpa_segment_group.this.id
   tcp_port_ranges  = [one(distinct(each.value.*.src_port_start)), one(distinct(each.value.*.src_port_end))]
   # UDP Port is optional - Add if needed
-  # udp_port_ranges  = distinct(each.value.*.port)
+  # udp_port_ranges  = = [one(distinct(each.value.*.src_port_start)), one(distinct(each.value.*.src_port_end))]
   server_groups {
     id = [data.zpa_server_group.this.id]
   }
@@ -47,18 +47,19 @@ resource "zpa_application_segment" "this" {
 # Create a Segment Group
 # https://help.zscaler.com/zpa/application-segment-group-use-cases
 resource "zpa_segment_group" "this" {
-  count = var.byo_segment_group == true ? 1 : 0
+  # count = var.byo_segment_group ? 1 : 0
+  count = var.byo_segment_group == false ? 1 : 0
 
   name                   = "${var.cts_prefix}${var.segment_group_name}"
   description            = "${var.cts_prefix}${var.segment_group_description}"
   enabled                = var.segment_group_enabled
-  tcp_keep_alive_enabled = var.tcp_keep_alive_enabled
+  tcp_keep_alive_enabled = var.segment_group_tcp_keep_alive_enabled
 }
 
 # Or reference an existing Segment Group
 data "zpa_segment_group" "this" {
-  id = var.byo_segment_group == true ? zpa_segment_group.this.*.id[0] : var.byo_segment_group_id
-  #name = var.byo_segment_group == true ? zpa_segment_group.this.*.name[0] : var.byo_segment_group_id
+  name = var.byo_segment_group == false ? zpa_segment_group.this[0].name : var.byo_segment_group_name
+  id   = var.byo_segment_group == false ? zpa_segment_group.this.*.id[0] : var.byo_segment_group_id
 }
 
 ################################################################################
@@ -67,7 +68,8 @@ data "zpa_segment_group" "this" {
 # Create a Server Group
 # https://help.zscaler.com/zpa/application-server-group-use-cases
 resource "zpa_server_group" "this" {
-  count = var.byo_server_group == true ? 1 : 0
+  # count = var.byo_server_group ? 1 : 0
+  count = var.byo_server_group == false ? 1 : 0
 
   name              = "${var.cts_prefix}${var.server_group_name}"
   description       = "${var.cts_prefix}${var.server_group_description}"
@@ -80,8 +82,8 @@ resource "zpa_server_group" "this" {
 
 # Or reference an existing Server Group
 data "zpa_server_group" "this" {
-  id = var.byo_server_group == true ? zpa_server_group.this.*.id[0] : var.byo_server_group_id
-  #name = var.byo_server_group == true ? zpa_server_group.this.*.name[0] : var.byo_server_group_id
+  name = var.byo_server_group == false ? zpa_server_group.this[0].name : var.byo_server_group_name
+  id   = var.byo_server_group == false ? zpa_server_group.this.*.id[0] : var.byo_server_group_id
 }
 
 ################################################################################
@@ -90,7 +92,8 @@ data "zpa_server_group" "this" {
 # Create an App Connector Group
 # https://help.zscaler.com/zpa/app-connector-group-use-cases
 resource "zpa_app_connector_group" "this" {
-  count = var.byo_app_connector_group == true ? 1 : 0
+  # count = var.byo_app_connector_group ? 1 : 0
+  count = var.byo_app_connector_group == false ? 1 : 0
 
   name                     = "${var.cts_prefix}${var.app_connector_group_name}"
   description              = "${var.cts_prefix}${var.app_connector_group_description}"
@@ -109,6 +112,6 @@ resource "zpa_app_connector_group" "this" {
 
 # Or reference an existing App Connector Group
 data "zpa_app_connector_group" "this" {
-  id = var.byo_app_connector_group == true ? zpa_app_connector_group.this.*.id[0] : var.byo_app_connector_group_id
-  #name = var.byo_app_connector_group == true ? zpa_app_connector_group.this.*.name[0] : var.byo_app_connector_group_id
+  name = var.byo_app_connector_group == false ? zpa_app_connector_group.this[0].name : var.byo_app_connector_group_name
+  id   = var.byo_app_connector_group == false ? zpa_app_connector_group.this.*.id[0] : var.byo_app_connector_group_id
 }
