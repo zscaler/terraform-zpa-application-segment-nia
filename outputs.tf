@@ -26,9 +26,9 @@ output "zpa_application_segment_tcp_port_range" {
   value       = zpa_application_segment.this.tcp_port_range
 }
 
-output "zpa_application_segment_tcp_port_range" {
+output "zpa_application_segment_udp_port_range" {
   description = "The ZPA Application Segment Domain Name"
-  value       = zpa_application_segment.this.tcp_port_range
+  value       = zpa_application_segment.this.udp_port_range
 }
 
 ################################################################################
@@ -39,7 +39,7 @@ output "zpa_segment_group_id" {
   value       = zpa_segment_group.this.id
 }
 
-output "zpa_segment_group_id" {
+output "zpa_segment_group_name" {
   description = "The ZPA Segment Group Name"
   value       = zpa_segment_group.this.name
 }

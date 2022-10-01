@@ -52,8 +52,7 @@ terraform_provider "zpa" {
 task {
   name = "zpa_application_segment_update"
   description = "This task dynamically updates application segments domain names, tcp and udp ports"
-  # module = "github.com/zscaler/terraform-zpa-application-segment-nia"
-  module = "../"
+  module = "git://github.com/zscaler/terraform-zpa-application-segment-nia?ref=v0.0.1"
   providers = ["zpa"]
   condition "services" {
     names = ["nginx","web","api"]

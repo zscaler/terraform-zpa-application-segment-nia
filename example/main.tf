@@ -8,7 +8,7 @@ terraform {
   required_version = ">= 0.13"
 }
 
-
+/*
 ################################################################################
 # Required when using HashiCorp Vault to Store ZPA API Keys
 ################################################################################
@@ -17,10 +17,15 @@ provider "zpa" {
   zpa_client_secret = "{{ with secret \"zscaler/zpacloud\" }}{{ .Data.data.client_secret }}{{ end }}"
   zpa_customer_id   = "{{ with secret \"zscaler/zpacloud\" }}{{ .Data.data.customer_id }}{{ end }}"
 }
+*/
 
+provider "zpa" {
+  # zpa_client_id     = "xxxxxxxxx"
+  # zpa_client_secret = "xxxxxxxxx"
+  # zpa_customer_id   = "123456789"
+}
 module "zpa_application_segment_module" {
-  # source   = "github.com/zscaler/terraform-zpa-application-segment-nia"
-  source   = "../"
+  source   = "git://github.com/zscaler/terraform-zpa-application-segment-nia?ref=v0.0.1"
   services = var.services
 
   # Bring-Your-Own Variables
