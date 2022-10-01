@@ -1,3 +1,4 @@
+/*
 output "consul_services" {
   description = "Application Segment Consul Locals"
   value       = local.consul_services
@@ -69,3 +70,4 @@ output "zpa_app_connector_group_name" {
   description = "The ZPA App Connector Group Name"
   value       = zpa_app_connector_group.this.name
 }
+*/
