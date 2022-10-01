@@ -20,7 +20,7 @@ buffer_period {
 
 # Consul Config Options
 consul {
-  address = "10.0.31.151:8500"
+  address = "127.0.0.1:8500"
 }
 
 # Terraform Driver Options
@@ -43,9 +43,9 @@ terraform_provider "zpa" {
 */
 
 terraform_provider "zpa" {
-  # zpa_client_id = ""
-  # zpa_client_secret = ""
-  # zpa_customer_id = ""
+  zpa_client_id = ""
+  zpa_client_secret = ""
+  zpa_customer_id = ""
 }
 
 task {
