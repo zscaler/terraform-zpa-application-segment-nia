@@ -1,3 +1,4 @@
+/*
 output "zpa_application_segment" {
   description = "The ZPA Application Segment"
   value       = module.zpa_application_segment_module.zpa_application_segment
@@ -17,3 +18,4 @@ output "zpa_app_connector_group" {
   description = "The ZPA App Connector Group"
   value       = module.zpa_application_segment_module.zpa_app_connector_group
 }
+*/
