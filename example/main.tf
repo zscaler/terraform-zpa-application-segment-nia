@@ -24,8 +24,10 @@ provider "zpa" {
   # zpa_client_secret = "xxxxxxxxx"
   # zpa_customer_id   = "123456789"
 }
+
+
 module "zpa_application_segment_module" {
-  source   = "github.com/zscaler/terraform-zpa-application-segment-nia"
+  source = "../"
   services = var.services
 
   # Bring-Your-Own Variables
