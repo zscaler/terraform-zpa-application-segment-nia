@@ -2,7 +2,7 @@ output "consul_services" {
   description = "Application Segment Consul Locals"
   value       = local.consul_services
 }
-
+/*
 ################################################################################
 # Application Segment Outputs
 ################################################################################
@@ -34,3 +34,4 @@ output "zpa_app_connector_group" {
   description = "The ZPA App Connector Group"
   value       = zpa_app_connector_group.this
 }
+*/
