@@ -1,9 +1,9 @@
 <a href="https://terraform.io">
-    <img src="https://raw.githubusercontent.com/hashicorp/terraform-website/master/public/img/logo-text.svg" alt="Terraform logo" title="Terraform" height="50" />
+    <img src="https://raw.githubusercontent.com/hashicorp/terraform-website/master/public/img/logo-text.svg" alt="Terraform logo" title="Terraform" height="30" />
 </a>
 
 <a href="https://www.zscaler.com/">
-    <img src="https://www.zscaler.com/themes/custom/zscaler/logo.svg" alt="Zscaler logo" title="Zscaler" height="50" />
+    <img src="https://www.zscaler.com/themes/custom/zscaler/logo.svg" alt="Zscaler logo" title="Zscaler" height="30" />
 </a>
 
 Zscaler Private Access (ZPA) Application Segment Module for Network Infrastructure Automation
